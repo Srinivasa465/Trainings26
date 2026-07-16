@@ -1,7 +1,10 @@
-﻿namespace trainings26;
+﻿using Trainings26;
+
+namespace trainings26;
 
 class Program {
    static void Main (string[] args) {
-      Console.WriteLine ("Hello, World!");
+      Balancedbracketchecker br = new Balancedbracketchecker ();
+      br.Brackets (Console.ReadLine());
    }
 }
