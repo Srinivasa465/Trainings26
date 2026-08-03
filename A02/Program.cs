@@ -23,7 +23,7 @@ public class Program {
                break;
             }
             WriteLine (userValue < randomValue ? "Your guess is too low." :
-               userValue > randomValue ? "your guess is too high" : "You guessed corrctly");
+               userValue > randomValue ? "Your guess is too high" : "You guessed corrctly!");
          } while (userValue != randomValue);
          bool validInput = false;
          while (!validInput) {
