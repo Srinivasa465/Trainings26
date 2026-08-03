@@ -6,7 +6,9 @@
 // Program to guess a random number between a range.
 // ------------------------------------------------------------------------------------------------
 using static System.Console;
-public class A02 {
+namespace A02;
+
+public class Program {
    static void Main () {
       bool playAgain = true;
       while (playAgain) {
@@ -14,32 +16,30 @@ public class A02 {
          do {
             while (true) {
                Write ("Enter a number between 1 and 100: ");
-               if (!int.TryParse (Console.ReadLine (), out userValue)) {
-                  WriteLine ("Please enter a valid number:");
-                  continue;
-               }
-               if (userValue < 1 || userValue > 100) {
-                  WriteLine ("Please enter a number between 1 and 100.");
+               if (!int.TryParse (ReadLine (), out userValue) || userValue < 1 || userValue > 100) {
+                  WriteLine ("Please enter a valid number!");
                   continue;
                }
                break;
             }
-            switch (userValue) {
-               case < 101 when userValue < randomValue:
-                  WriteLine ("Your guess is too low.");
-                  break;
-               case <= 100 when userValue > randomValue:
-                  WriteLine ("Your guess is too high.");
-                  break;
-               default:
-                  WriteLine ("You guessed correctly!");
-                  break;
-            }
+            WriteLine (userValue < randomValue ? "Your guess is too low." :
+               userValue > randomValue ? "your guess is too high" : "You guessed corrctly");
          } while (userValue != randomValue);
-         WriteLine ("Play again? (Y/N): ");
-         ConsoleKeyInfo key = ReadKey ();
-         WriteLine ();
-         playAgain = key.Key == ConsoleKey.Y;
+         bool validInput = false;
+         while (!validInput) {
+            Write ("Play again? (Y/N):");
+            ConsoleKeyInfo key = ReadKey ();
+            WriteLine ();
+            if (key.Key == ConsoleKey.Y) {
+               playAgain = true;
+               validInput = true;
+            } else if (key.Key == ConsoleKey.N) {
+               playAgain = false;
+               validInput = true;
+            } else {
+               WriteLine ("Invalid input, please press Y/N");
+            }
+         }
       }
    }
 }
