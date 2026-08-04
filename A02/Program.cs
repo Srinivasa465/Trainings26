@@ -6,39 +6,33 @@
 // Program to guess a random number between a range.
 // ------------------------------------------------------------------------------------------------
 using static System.Console;
+using static System.ConsoleKey;
+
 namespace A02;
 
 public class Program {
    static void Main () {
-      bool playAgain = true;
-      while (playAgain) {
-         int randomValue = new Random ().Next (1, 101), userValue;
+      while (true) {
+         int rNum = new Random ().Next (1, 101), inp;
          do {
             while (true) {
                Write ("Enter a number between 1 and 100: ");
-               if (!int.TryParse (ReadLine (), out userValue) || userValue < 1 || userValue > 100) {
+               if (!int.TryParse (ReadLine (), out inp) || inp is < 1 or > 100) {
                   WriteLine ("Please enter a valid number!");
                   continue;
                }
                break;
             }
-            WriteLine (userValue < randomValue ? "Your guess is too low." :
-               userValue > randomValue ? "Your guess is too high" : "You guessed corrctly!");
-         } while (userValue != randomValue);
-         bool validInput = false;
-         while (!validInput) {
+            WriteLine (inp < rNum ? "Your guess is too low." :
+                       inp > rNum ? "Your guess is too high" : "You guessed corrctly!");
+         } while (inp != rNum);
+         for (; ; ) {
             Write ("Play again? (Y/N):");
-            ConsoleKeyInfo key = ReadKey ();
+            var key = ReadKey ().Key;
             WriteLine ();
-            if (key.Key == ConsoleKey.Y) {
-               playAgain = true;
-               validInput = true;
-            } else if (key.Key == ConsoleKey.N) {
-               playAgain = false;
-               validInput = true;
-            } else {
-               WriteLine ("Invalid input, please press Y/N");
-            }
+            if (key is N) Environment.Exit (0);
+            if (key is Y) break;
+            continue;
          }
       }
    }
