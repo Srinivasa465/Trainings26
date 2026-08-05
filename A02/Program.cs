@@ -24,7 +24,7 @@ public class Program {
                break;
             }
             WriteLine (inp < rNum ? "Your guess is too low." :
-                       inp > rNum ? "Your guess is too high" : "You guessed corrctly!");
+                       inp > rNum ? "Your guess is too high" : "You guessed correctly!");
          } while (inp != rNum);
          for (; ; ) {
             Write ("Play again? (Y/N):");
